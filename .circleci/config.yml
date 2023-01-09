@@ -88,12 +88,12 @@ jobs:
             aws configure set preview.cloudfront
             if [ "${CIRCLE_BRANCH}" == "master" ]
             then
-              aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --paths /\* --parameter-overrides DummyKey=Value
+              aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --paths /\* --parameter-overrides value=1
             elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
-              aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --paths /\* --parameter-overrides DummyKey=Value
+              aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --paths /\* --parameter-overrides value=1
             else
-              aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --paths /\* --parameter-overrides DummyKey=Value
+              aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --paths /\* --parameter-overrides value=1
             fi
 workflows:
   build_and_deploy:
