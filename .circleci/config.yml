@@ -109,6 +109,7 @@ workflows:
                 - develop
                 - staging
                 - master
+                - main
       - deploy-to-aws-cloudfront:
           requires:
             - deploy-to-aws-s3
@@ -118,3 +119,4 @@ workflows:
                 - develop
                 - staging
                 - master
+                - main
