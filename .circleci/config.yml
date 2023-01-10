@@ -62,12 +62,6 @@ jobs:
       - checkout
       - *show-current-branch-name
       - *restore-cache
-      - slack/notify:
-          color: '#42e2f4'
-          mentions: 'USERID1,USERID2,'
-          message: This is a custom message notification
-          webhook: https://hooks.slack.com/services/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
-          when: always
       - run:
           name: Run linting
           command: npm run lint 
