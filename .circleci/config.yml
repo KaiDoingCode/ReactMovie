@@ -64,7 +64,7 @@ jobs:
       - *restore-cache
       - run:
           name: Run linting
-          command: npm run lint 
+          command: npm run lint
   prettier:
     executor: app-executor
     steps:
