@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import logo from './logo.svg';
 import './App.css';
 
@@ -20,6 +21,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;

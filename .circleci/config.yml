@@ -52,23 +52,15 @@ jobs:
       - *install-dependencies 
       - *save-cache
 
-  deploy-to-heroku:
-    executor: app-executor
-    steps: 
+  linting: 
+    executor: app-executor 
+    steps:
       - checkout
-      - *show-current-branch-name
+      - *show-current-branch-name 
+      - *restore-cache
       - run:
-          name: Deploy to Heroku
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]
-            then
-              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/cinema-app-production.git ${CIRCLE_BRANCH}:master -f
-            elif [ "${CIRCLE_BRANCH}" == "staging" ]
-            then
-              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/cinema-app-staging.git ${CIRCLE_BRANCH}:master -f
-            else
-              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/cinema-app-dev.git ${CIRCLE_BRANCH}:master -f
-            fi 
+          name: Run linting
+          command: npm run lint
 
 
   deploy-to-aws-s3:
@@ -114,10 +106,18 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-
+      - linting:
+        requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
       - deploy-to-aws-s3:
           requires:
-            - build
+            - linting
           filters:
             branches:
               only:
@@ -133,13 +133,3 @@ workflows:
                 - develop
                 - staging
                 - master
-
-      - deploy-to-heroku:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - develop
-                - staging
-                - master 
