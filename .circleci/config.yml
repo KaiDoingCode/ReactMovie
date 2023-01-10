@@ -52,11 +52,11 @@ jobs:
       - *install-dependencies 
       - *save-cache
 
-  linting: 
-    executor: app-executor 
+  linting:
+    executor: app-executor
     steps:
       - checkout
-      - *show-current-branch-name 
+      - *show-current-branch-name
       - *restore-cache
       - run:
           name: Run linting
@@ -107,8 +107,8 @@ workflows:
     jobs:
       - build
       - linting:
-        requires:
-            - build
+          requires:
+              - build
           filters:
             branches:
               only:
