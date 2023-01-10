@@ -52,6 +52,25 @@ jobs:
       - *install-dependencies 
       - *save-cache
 
+  deploy-to-heroku:
+    executor: app-executor
+    steps: 
+      - checkout
+      - *show-current-branch-name
+      - run:
+          name: Deploy to Heroku
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]
+            then
+              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/cinema-app-production.git ${CIRCLE_BRANCH}:master -f
+            elif [ "${CIRCLE_BRANCH}" == "staging" ]
+            then
+              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/cinema-app-staging.git ${CIRCLE_BRANCH}:master -f
+            else
+              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/cinema-app-dev.git ${CIRCLE_BRANCH}:master -f
+            fi 
+
+
   deploy-to-aws-s3:
     executor: app-executor 
     steps:
@@ -114,3 +133,13 @@ workflows:
                 - develop
                 - staging
                 - master
+
+      - deploy-to-heroku:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master 
