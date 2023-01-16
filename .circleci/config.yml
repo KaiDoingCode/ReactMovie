@@ -138,16 +138,14 @@ jobs:
       - run:
           name: Deploy to AWS S3
           command: |
-            AWS_BUCKET_NAME=$(cat * > artifacts/cinema_bucket_name.txt | sed 's/\"//g')
-            echo $AWS_BUCKET_NAME
             if [ "${CIRCLE_BRANCH}" == "master" ]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_NAME} --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_PRODUCTION} --delete
             elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_NAME} --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_STAGING} --delete
             else
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_NAME } --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_DEV_BUCKET} --delete
             fi
   deploy-to-aws-cloudfront:
     executor: app-executor
@@ -161,17 +159,15 @@ jobs:
       - run:
           name: Deploy to AWS Cloudfront
           command: |
-            CLOUDFRONT_DISTRIBUTION_ID=$(cat * > artifacts/cloudfront_distribution_id.txt | sed 's/\"//g')
-            echo $CLOUDFRONT_DISTRIBUTION_ID
             aws configure set preview.cloudfront true
             if [ "${CIRCLE_BRANCH}" == "master" ]
             then
-              aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths /\*
+              aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --paths /\*
             elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
-              aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths /\*
+              aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --paths /\*
             else
-              aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths /\*
+              aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --paths /\*
             fi
   notify-via-slack:
     executor: slack-executor
