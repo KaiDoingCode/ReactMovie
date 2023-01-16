@@ -286,7 +286,7 @@ workflows:
                 - master
       - deploy-to-aws-s3:
           requires:
-            - prettier
+            - terraform-plan-and-apply
           filters:
             branches:
               only:
