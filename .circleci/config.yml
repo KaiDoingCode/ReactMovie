@@ -27,7 +27,7 @@ aliases:
   - &install-dependencies
     run:
       name: Install dependencies
-      command: | 
+      command: |
         mkdir -p artifacts
         npm install
   - &save-cache
@@ -127,7 +127,7 @@ jobs:
           root: ./
           paths:
             - artifacts
-        
+
   deploy-to-aws-s3:
     executor: app-executor
     steps:
@@ -152,7 +152,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ./ 
+          at: ./
       - *show-current-branch-name
       - *install-aws-cli
       - *build-project
@@ -315,7 +315,7 @@ workflows:
             - deploy-to-aws-cloudfront
       - terraform-destroy:
           requires:
-            - hold 
+            - hold
           filters:
             branches:
               only:
