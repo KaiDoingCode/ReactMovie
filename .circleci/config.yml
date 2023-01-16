@@ -95,6 +95,7 @@ jobs:
       - run:
           name: Terraform Validate & Format
           command: |
+            cd ..
             cd infrastructure/
             terraform init -backend=false
             terraform validate 
