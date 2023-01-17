@@ -1,5 +1,8 @@
 A react app built with redux and [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction). The app is deployed to AWS S3 and distributed with AWS cloudfront.
 
+## Preview links
+App can be accessed via this preview link: https://d3ok3bggq9wv0q.cloudfront.net/
+
 ## Tools
 
 - React
