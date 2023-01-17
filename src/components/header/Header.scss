@@ -18,7 +18,7 @@
 
 .header-navbar {
   display: grid;
-  grid-template: "link . . menu search";
+  grid-template: 'link . . menu search';
   grid-template-columns: max-content 1fr 1fr max-content max-content;
   height: 50px;
   line-height: 50px;

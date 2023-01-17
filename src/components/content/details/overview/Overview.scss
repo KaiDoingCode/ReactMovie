@@ -97,7 +97,7 @@
       }
 
       a:not(:last-child):after {
-        content: ",";
+        content: ',';
       }
     }
   }

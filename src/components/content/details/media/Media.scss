@@ -1,9 +1,9 @@
 .media {
   display: grid;
   grid-template-areas:
-    "title"
-    "images"
-    "videos";
+    'title'
+    'images'
+    'videos';
   grid-template-columns: 1fr;
   grid-template-rows: max-content;
 }
