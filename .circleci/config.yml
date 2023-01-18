@@ -282,7 +282,7 @@ workflows:
                 - master
       - unit-test:
           requires:
-            - prettier
+            - terraform-plan-and-apply
           filters:
             branches:
               only:
