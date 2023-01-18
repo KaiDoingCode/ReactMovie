@@ -28,3 +28,5 @@ App can be accessed via this preview link: https://d3ok3bggq9wv0q.cloudfront.net
 ```js
 REACT_APP_API_SECRET=your api key
 ```
+
+- Inside the circleCI folder, config.yml file is for the CI pipelines of circle CI. It is optional for you to deploy them through circleCI.
