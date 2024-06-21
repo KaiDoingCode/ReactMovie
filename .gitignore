@@ -21,3 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+infrastructure/.terraform
+infrastructure/.terraform.lock.hcl
+
+infrastructure/override.tf
+infrastructure/override.tf.json
+infrastructure/*_override.tf
+infrastructure/*_override.tf.json
+
+# Env file
+.env
