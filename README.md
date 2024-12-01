@@ -17,7 +17,6 @@ App can be accessed via this preview link: https://d3ok3bggq9wv0q.cloudfront.net
 
 ## Main features
 
-- AWS deployment to Cloudfront storage.
 - Movie filtering.
 - New movie updated weekly.
 - Popular and top rated movie filtering.
