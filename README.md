@@ -15,7 +15,15 @@ App can be accessed via this preview link: https://d3ok3bggq9wv0q.cloudfront.net
 - Slack
 - Sentry
 
-## App Usage Locally
+## Main features
+
+- AWS deployment to Cloudfront storage.
+- Movie filtering.
+- New movie updated weekly.
+- Popular and top rated movie filtering.
+- Movie and actors information.
+
+## How to run the project locally
 
 - Clone the repo
 
